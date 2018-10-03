@@ -15,7 +15,6 @@ class App extends Component {
     };
   }
 
-
   getPoolData() {
     fetch('https://data.seattle.gov/resource/ppq2-qxkx', {
       method: "GET",
