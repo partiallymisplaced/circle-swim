@@ -314,7 +314,7 @@ class Map extends Component {
     // let locations = this.props.poolList;
     // console.log(locations[0].address);
     return (
-      <div id="map" className="pools-map">
+      <div id="map" className="pool-map">
         <p>There be a map.</p>
       </div>
     )

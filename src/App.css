@@ -1,23 +1,98 @@
-.App {
+* {
+  padding: 0;
+  margin: 0;
+}
 
+main {
+  display: flex;
+  flex-direction: row;
+}
+
+header {
+  background-color: #fff;
+  position: fixed;
+  width: 100vw;
+  border-bottom: 1px solid #dadada;
+}
+
+h1 {
+  font-size: 28px;
+  font-weight: 500;
+  color: #2eb1ff;
+  padding: 32px;
 }
 
 aside {
-  position: relative;
-  top: 0;
-  left: 0;
+  padding: 0 32px;
+  max-height: 100vh;
+  overflow-y: auto;
+  width: 25vw;
   background-color: #fff;
-  height: 100vh;
-  width: 20vw;
-  z-index: 1000;
-  overflow-y: scroll;
 }
 
-.pools-map {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100vw;
+aside ol {
+  list-style: none;
+}
+
+aside label {
+  display: block;
+  margin-top: 120px;
+  line-height: 48px;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+aside select {
+  font-family: 'Encode Sans Expanded', sans-serif;
+  width: 100%;
+  border: 1px solid #dadada;
+  border-radius: 4px;
+  padding: 8px 12px;
+  margin-bottom: 32px;
+}
+
+.pool-list-item {
+  padding: 20px 0;
+  border-bottom: 1px solid #dadada;
+}
+
+.pool-list-item p {
+  line-height: 1.8em;
+}
+
+.pool-name {
+  font-weight: 600;
+  font-size: 1.1em;
+  color: #2eb1ff;
+}
+
+.pool-type {
+  color: #9e9e9e;
+}
+
+.pool-map {
   height: 100vh;
-  background-color: #c1e7fd;
+  width: 75vw;
+  background-color: #c4ddec;
+}
+
+@media screen and (max-width: 960px) {
+  main {
+    flex-direction: column-reverse;
+  }
+  .pool-map {
+    width: 100vw;
+    height: 50vh;
+  }
+  
+  aside {
+    width: calc(100vw - 82px);
+    height: inherit;
+    padding: 32px;
+    overflow-y: unset;
+  }
+
+  aside label {
+    margin-top: 0px;
+  }
 }

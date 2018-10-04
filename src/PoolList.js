@@ -2,53 +2,39 @@ import React, { Component } from 'react';
 import Pool from './Pool';
 
 class PoolList extends Component {
-    state = {
-      toggle: true,
-    }
-
-
-  handleClick = () => {
-    this.setState({
-      toggle: !this.state.toggle,
-    })
-  }
   render() {
-    console.log('props', this.props)
 
     return (
-      <div>
-        <aside>
-          <header>
-            <h1>Circle Swim</h1>
-            <button onClick={this.handleClick} >Toggle</button>
-          </header>
-            {this.state.toggle ? (<p>Toggle on</p>)
-              : (<p>Toggle off</p>)
+      <aside>
+        <label htmlFor="select-pool-type">Pool Type:</label>
+        <select
+          id="select-pool-type"
+          name="select-pool-type"
+          onChange={(event) => this.props.handleChange(
+            this.props.pool, event.target.value
+          )}
+          >
+          <option value="Any">Any</option>
+          <option value="Indoor">Indoor</option>
+          <option value="Outdoor">Outdoor</option>
+        </select>
+
+        <div>
+          <ol>
+            {
+              this.props.poolList
+              .map(pool => (
+                <li key={pool.pmaid} className="pool-list-item">
+                  <Pool
+                    pool={pool}
+                    />
+                </li>
+
+              ))
             }
-
-          {console.log(this.state.toggle)}
-          <select>
-            <option>Any</option>
-            <option>Indoor</option>
-            <option>Outdoor</option>
-          </select>
-          <div>
-            <ol>
-              {
-                this.props.poolList
-                .map(pool => (
-                  <li key={pool.pmaid}>
-                    <Pool
-                      pool={pool}
-                      />
-                  </li>
-
-                ))
-              }
-            </ol>
-          </div>
-        </aside>
-      </div>
+          </ol>
+        </div>
+      </aside>
     )
   }
 }
