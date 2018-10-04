@@ -11,7 +11,8 @@ class App extends Component {
     super(props);
 
     this.state = {
-      poolList: []
+      poolList: [],
+      poolsToRender: [],
     };
   }
 
@@ -25,19 +26,42 @@ class App extends Component {
       data: {
         "app_token": "XYEEYf573j7hRlczkT6WSAZKK"
       }
-    }).then(response => response.json()).then(data => this.setState({poolList: data}));
+    })
+    .then(response => response.json())
+    .then(data => this.setState({poolList: data, poolsToRender: data}));
   }
+
 
   componentDidMount() {
     this.getPoolData();
   }
 
-  render() {
-    return (<main>
-      <PoolList poolList={this.state.poolList}/>
-      <Map poolList={this.state.poolList}/>
-    </main>);
+  handleChange = (__, poolFilter) => {
+    this.setState({
+      poolsToRender: this.state.poolList.filter(
+        item => poolFilter !=='Any'
+        ? item.indoor_out === poolFilter
+        : 'Indoor' || "Outdoor" )
+    });
   }
+
+  render() {
+
+    return (
+    <div className="app-wrapper">
+      <header>
+        <h1>Circle Swim</h1>
+      </header>
+      <main>
+        <PoolList
+          poolList={this.state.poolsToRender}
+          handleChange={this.handleChange}/>
+        <Map
+          poolList={this.state.poolList}
+        />
+      </main>
+    </div>
+  );}
 }
 
 export default App;
