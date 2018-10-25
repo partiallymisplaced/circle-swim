@@ -2,8 +2,8 @@ import React, {Component} from 'react';
 // import logo from './logo.svg';
 import './App.css';
 
-import PoolList from './PoolList';
-import Map from './Map';
+import PoolList from './components/PoolList';
+import Map from './components/Map';
 
 class App extends Component {
 
@@ -12,9 +12,16 @@ class App extends Component {
 
     this.state = {
       poolList: [],
-      poolsToRender: [],
+      poolsToRender: []
     };
   }
+
+ 
+
+  // getPoolData().then(
+  // initMap()
+  // )
+  //
 
   getPoolData() {
     fetch('https://data.seattle.gov/resource/ppq2-qxkx', {
@@ -28,12 +35,14 @@ class App extends Component {
       }
     })
     .then(response => response.json())
-    .then(data => this.setState({poolList: data, poolsToRender: data}));
+    .then(data => this.setState({poolList: data, poolsToRender: data}))
+    // .then(this.initMap())
   }
 
+  async componentDidMount() {
+    await this.getPoolData()
 
-  componentDidMount() {
-    this.getPoolData();
+    console.log("The pool data gets fetched in componentDidMount");
   }
 
   handleChange = (__, poolFilter) => {
@@ -41,27 +50,34 @@ class App extends Component {
       poolsToRender: this.state.poolList.filter(
         item => poolFilter !=='Any'
         ? item.indoor_out === poolFilter
-        : 'Indoor' || "Outdoor" )
+        : 'Indoor' || "Outdoor" ),
     });
   }
 
   render() {
-
     return (
     <div className="app-wrapper">
       <header>
         <h1>Circle Swim</h1>
       </header>
       <main>
+
+        {/* {console.log(this.state.poolsToRender)} */}
         <PoolList
           poolList={this.state.poolsToRender}
           handleChange={this.handleChange}/>
-        <Map
-          poolList={this.state.poolList}
-        />
+        
+        {this.state.poolsToRender.length > 0 && 
+            <Map
+            poolList={this.state.poolsToRender}
+            handleChange={this.handleChange} />
+        }
+        
+        
       </main>
     </div>
-  );}
+    );
+  }
 }
 
 export default App;
