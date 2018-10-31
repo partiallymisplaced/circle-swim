@@ -12,16 +12,9 @@ class App extends Component {
 
     this.state = {
       poolList: [],
-      poolsToRender: []
+      filteredPoolList: []
     };
   }
-
- 
-
-  // getPoolData().then(
-  // initMap()
-  // )
-  //
 
   getPoolData() {
     fetch('https://data.seattle.gov/resource/ppq2-qxkx', {
@@ -35,19 +28,17 @@ class App extends Component {
       }
     })
     .then(response => response.json())
-    .then(data => this.setState({poolList: data, poolsToRender: data}))
-    // .then(this.initMap())
+    .then(data => this.setState({poolList: data, filteredPoolList: data}))
   }
 
   async componentDidMount() {
     await this.getPoolData()
-
     console.log("The pool data gets fetched in componentDidMount");
   }
 
   handleChange = (__, poolFilter) => {
     this.setState({
-      poolsToRender: this.state.poolList.filter(
+      filteredPoolList: this.state.poolList.filter(
         item => poolFilter !=='Any'
         ? item.indoor_out === poolFilter
         : 'Indoor' || "Outdoor" ),
@@ -62,18 +53,15 @@ class App extends Component {
       </header>
       <main>
 
-        {/* {console.log(this.state.poolsToRender)} */}
         <PoolList
-          poolList={this.state.poolsToRender}
+          poolList={this.state.filteredPoolList}
           handleChange={this.handleChange}/>
         
-        {this.state.poolsToRender.length > 0 && 
-            <Map
-            poolList={this.state.poolsToRender}
-            handleChange={this.handleChange} />
+        {this.state.filteredPoolList.length > 0 && 
+          <Map
+          poolList={this.state.filteredPoolList}
+          handleChange={this.handleChange} />
         }
-        
-        
       </main>
     </div>
     );

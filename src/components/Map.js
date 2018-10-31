@@ -5,38 +5,52 @@ class Map extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      poolList: this.props.poolList
+      markers: [],
+      map: {},
+      poolInfoWindow: new window.google.maps.InfoWindow(),
     };
-
-    // let markers = this.state.poolList;
   }
-  
-  
-  addMarkers() {
-    let markers = this.props.poolList;
-    console.log("markers are", markers);
-    for (let i = 0; i < markers.length; i++) {
+
+  addInfoWindowToInfoWindow(i) {
+    this.state.poolInfoWindow.setContent(
+      `<p class="pool-name">${this.props.poolList[i].name}</p> 
+         <p>${this.props.poolList[i].address}</p>
+         <p>${this.props.poolList[i].phone}</p>
+         <p class="pool-type">${this.props.poolList[i].indoor_out}</p>`
+    );
+  }
+
+  generateMarkersArray() {
+    let markers = [];
+    for (let i = 0; i < this.props.poolList.length; i++) {
       let marker = new window.google.maps.Marker({
+        id: this.props.poolList[i].pmaid,
+        animation: window.google.maps.Animation.DROP,
         position: {
-          lat: parseFloat(markers[i].latitude),
-          lng: parseFloat(markers[i].longitude)
-        },
-        map: this.state.map,
-        id: i
+          lat: parseFloat(this.props.poolList[i].latitude),
+          lng: parseFloat(this.props.poolList[i].longitude)
+        },    
       });
-      // markersArr.push(marker)
-      marker.setMap(this.state.map);
+      marker.addListener('click', () => {
+        this.addInfoWindowToInfoWindow(i)
+        this.state.poolInfoWindow.open(this.state.map, marker);
+      });
+      markers.push(marker);
     }
-
-    // console.log(markersArr, 'MA')
+    this.setState({ markers });
   }
 
-  clearMarkers(poolList = this.state.poolList) {
-    console.log('clearing');
-
+  addMarkersToMap() {
+    for (let i = 0; i < this.state.markers.length; i++) {
+      this.state.markers[i].setMap(this.state.map);
+    }
   }
 
-
+  clearMarkersFromMap() {
+    for (let i = 0; i < this.state.markers.length; i++) {
+      this.state.markers[i].setMap(null);
+    }
+  }
 
   initMap() {
     let map = new window.google.maps.Map(document.getElementById("map"), {
@@ -44,48 +58,31 @@ class Map extends Component {
         lat: 47.63626287,
         lng: -122.35795027
       },
-      zoom: 13
+      zoom: 12
     });
     console.log("The map gets rendered.");
     return map;
   }
 
-  componentDidMount() {
-    // console.log(this.props);
+  async componentDidMount() {
     let map = this.initMap();
-    this.setState({
-      map: map
-    });
-    this.addMarkers();
+    await this.setState({ map });
+    await this.generateMarkersArray();
+    await this.addMarkersToMap();
   }
 
-  
-  // componentDidUpdate(prevProps, prevState) {
-  //   console.log("Component Did Update");
-  //   console.log("prev props", prevProps);
-  //   console.log("prev state", prevState);
-  //   if (prevProps !== prevState) {
-  //     console.log("Props should change");
-  //   }
-  // }
+  async componentDidUpdate(prevProps) {
+    if (prevProps.poolList !== this.props.poolList) {
+      console.log("Props should change");
+      await this.clearMarkersFromMap();
+      await this.generateMarkersArray();
+      await this.addMarkersToMap();
+    }
+  }
 
-  // static getDerivedStateFromProps(nextProps, prevState) {
-  //   console.log("Component Got Derived State From Props - prev state available to compare");
-  //   console.log("next props: ", nextProps);
-  //   console.log("prev state:", prevState);
-  //   if (nextProps !== prevState) {
-  //     console.log("State should change")
-  //   }
-  //   return nextProps;
-  // }
-  
   render() {
     return (
-      <div id="map" className="pool-map">
-        {this.addMarkers()}
-        {/* {console.log("map state", this.state.poolList)}
-        {console.log("map props", this.props.poolList)} */}
-      </div>
+      <div id="map" className="pool-map"></div>
     );
   }
 }
