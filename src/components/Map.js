@@ -6,6 +6,7 @@ class Map extends Component {
     this.state = {
       markers: [],
       map: {},
+      bounds: new window.google.maps.LatLngBounds(),
       poolInfoWindow: new window.google.maps.InfoWindow(),
       clickedPoolId: null,
     };
@@ -37,14 +38,18 @@ class Map extends Component {
         position: {
           lat: parseFloat(this.props.poolList[i].latitude),
           lng: parseFloat(this.props.poolList[i].longitude)
-        },    
+        },
+        icon: {
+          url: 'https://raw.githubusercontent.com/partiallymisplaced/circle-swim/master/src/cs-map-marker.png',
+        },
+
       });
       marker.addListener('click', () => {
         this.addInfoWindowToInfoWindow(i)
         this.state.poolInfoWindow.open(this.state.map, marker);
       });
-      
       markers.push(marker);
+      this.state.bounds.extend(markers[i].position);
     }
     this.setState({ markers });
   }
@@ -62,13 +67,233 @@ class Map extends Component {
   }
 
   initMap() {
+    let styledMapType = new window.google.maps.StyledMapType([
+      {
+        "elementType": "geometry",
+        "stylers": [
+          {
+            "color": "#f5f5f5"
+          }
+        ]
+      }, {
+        "elementType": "labels.icon",
+        "stylers": [
+          {
+            "visibility": "off"
+          }
+        ]
+      }, {
+        "elementType": "labels.text.fill",
+        "stylers": [
+          {
+            "color": "#616161"
+          }
+        ]
+      }, {
+        "elementType": "labels.text.stroke",
+        "stylers": [
+          {
+            "color": "#f5f5f5"
+          }
+        ]
+      }, {
+        "featureType": "administrative.land_parcel",
+        "elementType": "labels",
+        "stylers": [
+          {
+            "visibility": "off"
+          }
+        ]
+      }, {
+        "featureType": "administrative.land_parcel",
+        "elementType": "labels.text.fill",
+        "stylers": [
+          {
+            "color": "#bdbdbd"
+          }
+        ]
+      }, {
+        "featureType": "administrative.neighborhood",
+        "elementType": "labels.text.fill",
+        "stylers": [
+          {
+            "color": "#b5b5b5"
+          }
+        ]
+      }, {
+        "featureType": "administrative.neighborhood",
+        "elementType": "labels.text.stroke",
+        "stylers": [
+          {
+            "color": "#ffffff"
+          }
+        ]
+      }, {
+        "featureType": "poi",
+        "elementType": "geometry",
+        "stylers": [
+          {
+            "color": "#eeeeee"
+          }
+        ]
+      }, {
+        "featureType": "poi",
+        "elementType": "labels.text",
+        "stylers": [
+          {
+            "visibility": "off"
+          }
+        ]
+      }, {
+        "featureType": "poi",
+        "elementType": "labels.text.fill",
+        "stylers": [
+          {
+            "color": "#757575"
+          }
+        ]
+      }, {
+        "featureType": "poi.business",
+        "stylers": [
+          {
+            "visibility": "off"
+          }
+        ]
+      }, {
+        "featureType": "poi.park",
+        "elementType": "geometry",
+        "stylers": [
+          {
+            "color": "#e5e5e5"
+          }
+        ]
+      }, {
+        "featureType": "poi.park",
+        "elementType": "geometry.fill",
+        "stylers": [
+          {
+            "color": "#d7eec1"
+          }
+        ]
+      }, {
+        "featureType": "poi.park",
+        "elementType": "labels.text.fill",
+        "stylers": [
+          {
+            "color": "#9e9e9e"
+          }
+        ]
+      }, {
+        "featureType": "road",
+        "elementType": "geometry",
+        "stylers": [
+          {
+            "color": "#ffffff"
+          }
+        ]
+      }, {
+        "featureType": "road.arterial",
+        "elementType": "labels.text.fill",
+        "stylers": [
+          {
+            "color": "#949494"
+          }
+        ]
+      }, {
+        "featureType": "road.highway",
+        "elementType": "geometry",
+        "stylers": [
+          {
+            "color": "#dadada"
+          }
+        ]
+      }, {
+        "featureType": "road.highway",
+        "elementType": "labels.text.fill",
+        "stylers": [
+          {
+            "color": "#616161"
+          }
+        ]
+      }, {
+        "featureType": "road.local",
+        "stylers": [
+          {
+            "visibility": "off"
+          }
+        ]
+      }, {
+        "featureType": "road.local",
+        "elementType": "labels",
+        "stylers": [
+          {
+            "visibility": "off"
+          }
+        ]
+      }, {
+        "featureType": "road.local",
+        "elementType": "labels.text.fill",
+        "stylers": [
+          {
+            "color": "#b5b5b5"
+          }
+        ]
+      }, {
+        "featureType": "transit.line",
+        "elementType": "geometry",
+        "stylers": [
+          {
+            "color": "#e5e5e5"
+          }
+        ]
+      }, {
+        "featureType": "transit.station",
+        "elementType": "geometry",
+        "stylers": [
+          {
+            "color": "#eeeeee"
+          }
+        ]
+      }, {
+        "featureType": "water",
+        "elementType": "geometry",
+        "stylers": [
+          {
+            "color": "#c9c9c9"
+          }
+        ]
+      }, {
+        "featureType": "water",
+        "elementType": "geometry.fill",
+        "stylers": [
+          {
+            "color": "#c4ddec"
+          }
+        ]
+      }, {
+        "featureType": "water",
+        "elementType": "labels.text.fill",
+        "stylers": [
+          {
+            "color": "#9e9e9e"
+          }
+        ]
+      }
+    ], {name: 'Styled Map'});
+
     let map = new window.google.maps.Map(document.getElementById("map"), {
       center: {
         lat: 47.63626287,
         lng: -122.35795027
       },
-      zoom: 12
+      zoom: 12,
+      mapTypeControlOptions: {
+        mapTypeIds: ['styled_map']
+      }
     });
+    map.mapTypes.set('styled_map', styledMapType);
+    map.setMapTypeId('styled_map');
+    map.fitBounds(this.state.bounds);
     return map;
   }
 
@@ -89,11 +314,11 @@ class Map extends Component {
     await this.triggerPoolInfoWindow();
   }
 
-  render() {
-    
+  render() {    
     return (
       <div id="map" className="pool-map"></div>
     );
   }
 }
+
 export default Map;
