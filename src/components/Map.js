@@ -316,7 +316,7 @@ class Map extends Component {
 
   render() {    
     return (
-      <div id="map" className="pool-map"></div>
+      <div id="map" className="pool-map" role="application"></div>
     );
   }
 }
