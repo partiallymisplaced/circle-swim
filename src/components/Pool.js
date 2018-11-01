@@ -11,7 +11,6 @@ class Pool extends Component {
         <h3 className="pool-name" onClick={this.handleClick} >
           {this.props.pool.name}
         </h3>
-        <p className="pool-address">{this.props.pool.address}</p>
         <p className="pool-type">{this.props.pool.indoor_out}</p>
       </div>;
   }

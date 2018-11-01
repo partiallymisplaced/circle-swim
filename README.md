@@ -4,7 +4,7 @@
 
 This project was created as the final part of Udacity's Front-end Nanodegree course. The goal was to create an app that fetches location data from a 3rd party API and renders it using the Google Maps Javascript API with React.
 
-I used the City of Seattle's [Open Data Portal](https://data.seattle.gov/), powered by Socrata (See API [here](https://dev.socrata.com/foundry/data.seattle.gov/ppq2-qxkx)) to get data about public swimming pools in the City of Seattle. 
+I used the City of Seattle's [Open Data Portal](https://data.seattle.gov/), powered by Socrata (See API [here](https://dev.socrata.com/foundry/data.seattle.gov/ppq2-qxkx)) to get data about public swimming pools in the City of Seattle. The viewer can see which of the pools are indoor or outdoor.
 
 ### How to view
 
