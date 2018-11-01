@@ -16,10 +16,12 @@ class PoolList extends Component {
           <ol>
             {this.props.poolList.map(pool => (
               <li key={pool.pmaid} className="pool-list-item">
-                <Pool pool={pool} />
+                <Pool
+                  pool={pool}
+                  getClickedPoolId={this.props.getClickedPoolId}
+                />
               </li>
             ))}
-          {/* {console.log("poollist", this.props.poolList)} */}
           </ol>
         </div>
       </aside>;

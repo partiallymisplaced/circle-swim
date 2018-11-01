@@ -64,6 +64,7 @@ aside select {
   font-weight: 600;
   font-size: 1.1em;
   color: #2eb1ff;
+  cursor: pointer;
 }
 
 .pool-type {

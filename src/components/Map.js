@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-// import Markers from './Markers';
 
 class Map extends Component {
   constructor(props) {
@@ -8,7 +7,16 @@ class Map extends Component {
       markers: [],
       map: {},
       poolInfoWindow: new window.google.maps.InfoWindow(),
+      clickedPoolId: null,
     };
+  }
+
+  triggerPoolInfoWindow(){
+    for (let i = 0; i < this.state.markers.length; i++){
+      if (this.state.markers[i].id === this.props.clickedPoolId){
+        new window.google.maps.event.trigger(this.state.markers[i], 'click');
+      }
+    }
   }
 
   addInfoWindowToInfoWindow(i) {
@@ -35,6 +43,7 @@ class Map extends Component {
         this.addInfoWindowToInfoWindow(i)
         this.state.poolInfoWindow.open(this.state.map, marker);
       });
+      
       markers.push(marker);
     }
     this.setState({ markers });
@@ -60,7 +69,6 @@ class Map extends Component {
       },
       zoom: 12
     });
-    console.log("The map gets rendered.");
     return map;
   }
 
@@ -69,18 +77,20 @@ class Map extends Component {
     await this.setState({ map });
     await this.generateMarkersArray();
     await this.addMarkersToMap();
+
   }
 
   async componentDidUpdate(prevProps) {
     if (prevProps.poolList !== this.props.poolList) {
-      console.log("Props should change");
       await this.clearMarkersFromMap();
       await this.generateMarkersArray();
       await this.addMarkersToMap();
     }
+    await this.triggerPoolInfoWindow();
   }
 
   render() {
+    
     return (
       <div id="map" className="pool-map"></div>
     );
