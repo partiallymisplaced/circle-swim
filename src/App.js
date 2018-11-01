@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 // import logo from './logo.svg';
 import './App.css';
 
@@ -33,9 +33,9 @@ class App extends Component {
       .then(data => this.setState({ poolList: data, filteredPoolList: data }));
   }
 
+  // The pool data gets fetched
   async componentDidMount() {
     await this.getPoolData();
-    console.log("The pool data gets fetched in componentDidMount");
   }
 
   handleChange = (__, poolFilter) => {

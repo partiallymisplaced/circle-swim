@@ -2,6 +2,13 @@
   padding: 0;
   margin: 0;
 }
+/* Style for google maps infowindows */
+#map.pool-map div {
+  font-family: 'Encode Sans Expanded', sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 24px;
+}
 
 main {
   display: flex;
@@ -75,6 +82,8 @@ aside select {
   height: 100vh;
   width: 75vw;
   background-color: #c4ddec;
+  margin-top: 100px;
+  margin-bottom: -100px;
 }
 
 @media screen and (max-width: 960px) {
@@ -95,5 +104,8 @@ aside select {
 
   aside label {
     margin-top: 0px;
+  }
+  .pool-map {
+    margin-bottom: 0;
   }
 }
