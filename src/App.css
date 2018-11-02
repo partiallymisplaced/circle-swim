@@ -2,12 +2,20 @@
   padding: 0;
   margin: 0;
 }
+
 /* Style for google maps infowindows */
 #map.pool-map div {
   font-family: 'Encode Sans Expanded', sans-serif;
   font-weight: 400;
   font-size: 14px;
   line-height: 24px;
+}
+
+.error-message {
+  color: #fff;
+  font-size: 14px;
+  background-color: #d25a48;
+  padding: 12px 24px;
 }
 
 main {
@@ -100,9 +108,11 @@ footer a {
   main {
     flex-direction: column-reverse;
   }
+
   .pool-map {
     width: 100vw;
     height: 50vh;
+    margin-bottom: 0;
   }
   
   aside {
@@ -114,8 +124,5 @@ footer a {
 
   aside label {
     margin-top: 0px;
-  }
-  .pool-map {
-    margin-bottom: 0;
   }
 }

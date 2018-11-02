@@ -6,16 +6,30 @@ class Map extends Component {
     this.state = {
       markers: [],
       map: {},
-      bounds: new window.google.maps.LatLngBounds(),
-      poolInfoWindow: new window.google.maps.InfoWindow(),
+      bounds: null,
+      poolInfoWindow: null,
       clickedPoolId: null,
     };
   }
+
+  setBounds = () => {
+    this.setState({
+      bounds: new window.google.maps.LatLngBounds(),
+    });
+  }
+
+  setPoolInfoWindow = () =>{
+    this.setState({
+      poolInfoWindow: new window.google.maps.InfoWindow(),
+    });
+  } 
 
   triggerPoolInfoWindow(){
     for (let i = 0; i < this.state.markers.length; i++){
       if (this.state.markers[i].id === this.props.clickedPoolId){
         new window.google.maps.event.trigger(this.state.markers[i], 'click');
+        this.state.markers[i].setAnimation(window.google.maps.Animation.BOUNCE);
+        setTimeout(() => { this.state.markers[i].setAnimation(null); }, 800); 
       }
     }
   }
@@ -291,6 +305,7 @@ class Map extends Component {
         mapTypeIds: ['styled_map']
       }
     });
+   
     map.mapTypes.set('styled_map', styledMapType);
     map.setMapTypeId('styled_map');
     map.fitBounds(this.state.bounds);
@@ -298,10 +313,17 @@ class Map extends Component {
   }
 
   async componentDidMount() {
-    let map = this.initMap();
-    await this.setState({ map });
-    await this.generateMarkersArray();
-    await this.addMarkersToMap();
+
+    if (window.google){
+      await this.setBounds();
+      let map = this.initMap();  
+      await this.setState({ map });
+      await this.generateMarkersArray();
+      await this.addMarkersToMap();
+      await this.setPoolInfoWindow();
+    } else {
+      this.props.setMapError();
+    }
 
   }
 

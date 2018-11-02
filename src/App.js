@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import ErrorMessage from './components/ErrorMessage';
 // import logo from './logo.svg';
 import './App.css';
 
@@ -12,12 +13,14 @@ class App extends Component {
     this.state = {
       poolList: [],
       filteredPoolList: [],
-      clickedPoolId: null
+      clickedPoolId: null,
+      hasError: false,
     };
   }
   getClickedPoolId = clickedPoolId => {
     this.setState({ clickedPoolId });
   };
+
   getPoolData() {
     fetch("https://data.seattle.gov/resource/ppq2-qxkx", {
       method: "GET",
@@ -30,8 +33,13 @@ class App extends Component {
       }
     })
       .then(response => response.json())
-      .then(data => this.setState({ poolList: data, filteredPoolList: data }));
+      .then(data => this.setState({ poolList: data, filteredPoolList: data }))
+      .catch((error) => {this.setState({hasError: true})})
   }
+
+  setMapError = () => {
+    this.setState({ hasError: true });
+  } 
 
   // The pool data gets fetched
   async componentDidMount() {
@@ -52,6 +60,7 @@ class App extends Component {
   render() {
     return (
       <div className="app-wrapper">
+      {this.state.hasError && <ErrorMessage />}
         <header>
           <h1>Circle Swim</h1>
         </header>
@@ -67,6 +76,7 @@ class App extends Component {
               poolList={this.state.filteredPoolList}
               handleChange={this.handleChange}
               clickedPoolId={this.state.clickedPoolId}
+              setMapError={this.setMapError}
             />
           )}
         </main>
