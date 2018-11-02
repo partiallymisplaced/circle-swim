@@ -38,7 +38,7 @@ class PoolList extends Component {
         </div>
       <footer> 
         <p>Pool info provided by the</p> 
-        <a href="https://dev.socrata.com/foundry/data.seattle.gov/ppq2-qxkx" target="_blank">City of Seattle Open Data API</a>
+        <a href="https://dev.socrata.com/foundry/data.seattle.gov/ppq2-qxkx" target="_blank" rel="noopener noreferrer">City of Seattle Open Data API</a>
         </footer>
       </aside>;
   }

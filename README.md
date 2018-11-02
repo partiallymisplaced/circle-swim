@@ -8,12 +8,24 @@ I used the City of Seattle's [Open Data Portal](https://data.seattle.gov/), powe
 
 ### How to view
 
-This project can only be previewed locally at this time. To test this repository:
+You can preview the app at https://partiallymisplaced.github.io/circle-swim/
 
-1. Clone to a local directory of your choice with `$ git clone https://github.com/partiallymisplaced/circle-swim.git`
+#### Running the project locally
+To review the code and test the app in a develompent environment:
+
+1. Clone this repository to a local directory of your choice with `$ git clone https://github.com/partiallymisplaced/circle-swim.git`
 2. Install all project dependencies with `npm install` 
 3. Start the development server with `npm start`
 4. View in browser on port 3000 `http://localhost:3000/`
+
+#### Testing functionality
+You can create a local build version which will make use of the service worker provided by `create-react-app`. To do so:
+
+1. Create a build using `npm run build`
+2. Serve build 
+    * If you don't have a preferred method to do so, `create-react-app` recommends using the [Serve](https://www.npmjs.com/package/serve) package. Install it using `npm i serve`. 
+    * Run the serve with `serve` 
+    * View the app at `http://localhost:5000` 
 
 ### Dependencies
 
