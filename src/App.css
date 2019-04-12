@@ -110,11 +110,11 @@ footer a {
   }
 
   .pool-map {
-    width: 100vw;
+    width: 100%;
     height: 50vh;
     margin-bottom: 0;
   }
-  
+
   aside {
     width: calc(100vw - 82px);
     height: inherit;
