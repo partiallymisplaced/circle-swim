@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import ErrorMessage from './components/ErrorMessage';
-// import logo from './logo.svg';
 import './App.css';
 
 import PoolList from './components/PoolList';
@@ -11,40 +10,483 @@ class App extends Component {
     super(props);
 
     this.state = {
-      poolList: [],
-      filteredPoolList: [],
+      poolList: [
+        {
+            "address": "1920 1st Ave West",
+            "coordinato": "Janet Wilson",
+            "full_name": "Queen Anne Pool",
+            "gis_edt_dt": "1899-11-30T00:00:00.000Z",
+            "indoor_out": "Indoor",
+            "latitude": "47.63626287",
+            "longitude": "-122.35795027",
+            "name": "Queen Anne Pool",
+            "official_n": "Queen Anne Pool",
+            "phone": "386-4282",
+            "pmaid": "337",
+            "point_x": "1264556.37500273",
+            "point_y": "235812.48453707",
+            "the_geom": {
+                "type": "Point",
+                "coordinates": [
+                    -122.35795026785668,
+                    47.63626286559663
+                ]
+            }
+        },
+        {
+            "address": "500 23rd Ave",
+            "coordinato": "Kristen Schuler",
+            "full_name": "Medgar Evers Pool",
+            "gis_edt_dt": "1899-11-30T00:00:00.000Z",
+            "indoor_out": "Indoor",
+            "latitude": "47.6068876",
+            "longitude": "-122.30240183",
+            "name": "Evers Pool",
+            "official_n": "Evers Memorial Pool",
+            "phone": "684-4766",
+            "pmaid": "353",
+            "point_x": "1278044.37492956",
+            "point_y": "224832.99993439",
+            "the_geom": {
+                "type": "Point",
+                "coordinates": [
+                    -122.30240182803597,
+                    47.606887600677034
+                ]
+            }
+        },
+        {
+            "address": "8825 Rainier Ave S",
+            "coordinato": "Donna Sammons",
+            "full_name": "Rainier Beach Pool",
+            "gis_edt_dt": "1899-11-30T00:00:00.000Z",
+            "indoor_out": "Indoor",
+            "latitude": "47.52476642",
+            "longitude": "-122.27033751",
+            "name": "Rainier Beach Pool",
+            "official_n": "Rainier Beach Pool",
+            "phone": "386-1944",
+            "pmaid": "434",
+            "point_x": "1285393.37499531",
+            "point_y": "194733.95317723",
+            "the_geom": {
+                "type": "Point",
+                "coordinates": [
+                    -122.27033751275907,
+                    47.524766415040474
+                ]
+            }
+        },
+        {
+            "address": "2801 SW Thistle St",
+            "coordinato": "Nancy Eisner",
+            "full_name": "Southwest Pool",
+            "gis_edt_dt": "1899-11-30T00:00:00.000Z",
+            "indoor_out": "Indoor",
+            "latitude": "47.52800132",
+            "longitude": "-122.36916224",
+            "name": "Southwest Pool",
+            "official_n": "Southwest Pool",
+            "phone": "233-7295",
+            "pmaid": "3996",
+            "point_x": "1261004.62488839",
+            "point_y": "196385.28123939",
+            "the_geom": {
+                "type": "Point",
+                "coordinates": [
+                    -122.36916224498255,
+                    47.52800132362959
+                ]
+            }
+        },
+        {
+            "address": "1471 NW 67th Street",
+            "coordinato": "Angela Eddy",
+            "full_name": "Captain William R. Ballard Pool",
+            "gis_edt_dt": "1899-11-30T00:00:00.000Z",
+            "indoor_out": "Indoor",
+            "latitude": "47.67754026",
+            "longitude": "-122.37616194",
+            "name": "Ballard Pool",
+            "official_n": "Ballard Pool",
+            "phone": "684-4094",
+            "pmaid": "498",
+            "point_x": "1260369.12517513",
+            "point_y": "250955.51560265",
+            "the_geom": {
+                "type": "Point",
+                "coordinates": [
+                    -122.376161943172,
+                    47.677540264436196
+                ]
+            }
+        },
+        {
+            "address": "13401 Meridian Ave N",
+            "coordinato": "Peter Brodkin",
+            "full_name": "Helene Madison Pool",
+            "gis_edt_dt": "1899-11-30T00:00:00.000Z",
+            "indoor_out": "Indoor",
+            "latitude": "47.72580143",
+            "longitude": "-122.3346563",
+            "name": "Madison Pool",
+            "official_n": "Helene Madison Memorial Pool",
+            "phone": "684-4979",
+            "pmaid": "285",
+            "point_x": "1270935.37503997",
+            "point_y": "268353.99983448",
+            "the_geom": {
+                "type": "Point",
+                "coordinates": [
+                    -122.33465629789156,
+                    47.72580143140825
+                ]
+            }
+        },
+        {
+            "address": "8603 Fauntleroy Wy S",
+            "coordinato": "Steve Vela",
+            "full_name": "Laurence Colman Pool",
+            "gis_edt_dt": "1899-11-30T00:00:00.000Z",
+            "indoor_out": "Outdoor",
+            "latitude": "47.53045332",
+            "longitude": "-122.40097906",
+            "name": "Colman Pool",
+            "official_n": "Colman Pool",
+            "phone": "684-7494",
+            "pmaid": "460",
+            "point_x": "1253163.87482189",
+            "point_y": "197437.98451456",
+            "the_geom": {
+                "type": "Point",
+                "coordinates": [
+                    -122.40097906178957,
+                    47.53045331604131
+                ]
+            }
+        },
+        {
+            "address": "7201 E GreenLk Dr N",
+            "coordinato": "Barb Marsh",
+            "full_name": "Evans Pool",
+            "gis_edt_dt": "1899-11-30T00:00:00.000Z",
+            "indoor_out": "Indoor",
+            "latitude": "47.68018276",
+            "longitude": "-122.32843756",
+            "name": "Evans Pool",
+            "official_n": "Evans Pool",
+            "phone": "684-0881",
+            "pmaid": "307",
+            "point_x": "1272142.37492256",
+            "point_y": "251687.18736765",
+            "the_geom": {
+                "type": "Point",
+                "coordinates": [
+                    -122.3284375582711,
+                    47.68018276418633
+                ]
+            }
+        },
+        {
+            "address": "10515 35th Ave NE",
+            "coordinato": "Scott Ferry",
+            "full_name": "Meadowbrook Pool",
+            "gis_edt_dt": "1899-11-30T00:00:00.000Z",
+            "indoor_out": "Indoor",
+            "latitude": "47.70534163",
+            "longitude": "-122.29162385",
+            "name": "Meadowbrook Pool",
+            "official_n": "Meadowbrook Pool",
+            "phone": "684-4989",
+            "pmaid": "352",
+            "point_x": "1281383.1251418",
+            "point_y": "260688.6404933",
+            "the_geom": {
+                "type": "Point",
+                "coordinates": [
+                    -122.29162384952146,
+                    47.70534162689962
+                ]
+            }
+        },
+        {
+            "address": "2535 32nd Ave West",
+            "coordinato": "Bill Dougherty",
+            "full_name": "Lowery C. \"Pop\" Mounger Pool",
+            "gis_edt_dt": "1899-11-30T00:00:00.000Z",
+            "indoor_out": "Outdoor",
+            "latitude": "47.64290025",
+            "longitude": "-122.3988701",
+            "name": "Mounger Pool",
+            "official_n": "Lowery C. \"Pop\" Mounger Pool",
+            "phone": "684-4078",
+            "pmaid": "4473",
+            "point_x": "1254519.12506413",
+            "point_y": "238435.60954015",
+            "the_geom": {
+                "type": "Point",
+                "coordinates": [
+                    -122.39887010304064,
+                    47.642900252830444
+                ]
+            }
+        }
+      ],
+      filteredPoolList: [
+        {
+            "address": "1920 1st Ave West",
+            "coordinato": "Janet Wilson",
+            "full_name": "Queen Anne Pool",
+            "gis_edt_dt": "1899-11-30T00:00:00.000Z",
+            "indoor_out": "Indoor",
+            "latitude": "47.63626287",
+            "longitude": "-122.35795027",
+            "name": "Queen Anne Pool",
+            "official_n": "Queen Anne Pool",
+            "phone": "386-4282",
+            "pmaid": "337",
+            "point_x": "1264556.37500273",
+            "point_y": "235812.48453707",
+            "the_geom": {
+                "type": "Point",
+                "coordinates": [
+                    -122.35795026785668,
+                    47.63626286559663
+                ]
+            }
+        },
+        {
+            "address": "500 23rd Ave",
+            "coordinato": "Kristen Schuler",
+            "full_name": "Medgar Evers Pool",
+            "gis_edt_dt": "1899-11-30T00:00:00.000Z",
+            "indoor_out": "Indoor",
+            "latitude": "47.6068876",
+            "longitude": "-122.30240183",
+            "name": "Evers Pool",
+            "official_n": "Evers Memorial Pool",
+            "phone": "684-4766",
+            "pmaid": "353",
+            "point_x": "1278044.37492956",
+            "point_y": "224832.99993439",
+            "the_geom": {
+                "type": "Point",
+                "coordinates": [
+                    -122.30240182803597,
+                    47.606887600677034
+                ]
+            }
+        },
+        {
+            "address": "8825 Rainier Ave S",
+            "coordinato": "Donna Sammons",
+            "full_name": "Rainier Beach Pool",
+            "gis_edt_dt": "1899-11-30T00:00:00.000Z",
+            "indoor_out": "Indoor",
+            "latitude": "47.52476642",
+            "longitude": "-122.27033751",
+            "name": "Rainier Beach Pool",
+            "official_n": "Rainier Beach Pool",
+            "phone": "386-1944",
+            "pmaid": "434",
+            "point_x": "1285393.37499531",
+            "point_y": "194733.95317723",
+            "the_geom": {
+                "type": "Point",
+                "coordinates": [
+                    -122.27033751275907,
+                    47.524766415040474
+                ]
+            }
+        },
+        {
+            "address": "2801 SW Thistle St",
+            "coordinato": "Nancy Eisner",
+            "full_name": "Southwest Pool",
+            "gis_edt_dt": "1899-11-30T00:00:00.000Z",
+            "indoor_out": "Indoor",
+            "latitude": "47.52800132",
+            "longitude": "-122.36916224",
+            "name": "Southwest Pool",
+            "official_n": "Southwest Pool",
+            "phone": "233-7295",
+            "pmaid": "3996",
+            "point_x": "1261004.62488839",
+            "point_y": "196385.28123939",
+            "the_geom": {
+                "type": "Point",
+                "coordinates": [
+                    -122.36916224498255,
+                    47.52800132362959
+                ]
+            }
+        },
+        {
+            "address": "1471 NW 67th Street",
+            "coordinato": "Angela Eddy",
+            "full_name": "Captain William R. Ballard Pool",
+            "gis_edt_dt": "1899-11-30T00:00:00.000Z",
+            "indoor_out": "Indoor",
+            "latitude": "47.67754026",
+            "longitude": "-122.37616194",
+            "name": "Ballard Pool",
+            "official_n": "Ballard Pool",
+            "phone": "684-4094",
+            "pmaid": "498",
+            "point_x": "1260369.12517513",
+            "point_y": "250955.51560265",
+            "the_geom": {
+                "type": "Point",
+                "coordinates": [
+                    -122.376161943172,
+                    47.677540264436196
+                ]
+            }
+        },
+        {
+            "address": "13401 Meridian Ave N",
+            "coordinato": "Peter Brodkin",
+            "full_name": "Helene Madison Pool",
+            "gis_edt_dt": "1899-11-30T00:00:00.000Z",
+            "indoor_out": "Indoor",
+            "latitude": "47.72580143",
+            "longitude": "-122.3346563",
+            "name": "Madison Pool",
+            "official_n": "Helene Madison Memorial Pool",
+            "phone": "684-4979",
+            "pmaid": "285",
+            "point_x": "1270935.37503997",
+            "point_y": "268353.99983448",
+            "the_geom": {
+                "type": "Point",
+                "coordinates": [
+                    -122.33465629789156,
+                    47.72580143140825
+                ]
+            }
+        },
+        {
+            "address": "8603 Fauntleroy Wy S",
+            "coordinato": "Steve Vela",
+            "full_name": "Laurence Colman Pool",
+            "gis_edt_dt": "1899-11-30T00:00:00.000Z",
+            "indoor_out": "Outdoor",
+            "latitude": "47.53045332",
+            "longitude": "-122.40097906",
+            "name": "Colman Pool",
+            "official_n": "Colman Pool",
+            "phone": "684-7494",
+            "pmaid": "460",
+            "point_x": "1253163.87482189",
+            "point_y": "197437.98451456",
+            "the_geom": {
+                "type": "Point",
+                "coordinates": [
+                    -122.40097906178957,
+                    47.53045331604131
+                ]
+            }
+        },
+        {
+            "address": "7201 E GreenLk Dr N",
+            "coordinato": "Barb Marsh",
+            "full_name": "Evans Pool",
+            "gis_edt_dt": "1899-11-30T00:00:00.000Z",
+            "indoor_out": "Indoor",
+            "latitude": "47.68018276",
+            "longitude": "-122.32843756",
+            "name": "Evans Pool",
+            "official_n": "Evans Pool",
+            "phone": "684-0881",
+            "pmaid": "307",
+            "point_x": "1272142.37492256",
+            "point_y": "251687.18736765",
+            "the_geom": {
+                "type": "Point",
+                "coordinates": [
+                    -122.3284375582711,
+                    47.68018276418633
+                ]
+            }
+        },
+        {
+            "address": "10515 35th Ave NE",
+            "coordinato": "Scott Ferry",
+            "full_name": "Meadowbrook Pool",
+            "gis_edt_dt": "1899-11-30T00:00:00.000Z",
+            "indoor_out": "Indoor",
+            "latitude": "47.70534163",
+            "longitude": "-122.29162385",
+            "name": "Meadowbrook Pool",
+            "official_n": "Meadowbrook Pool",
+            "phone": "684-4989",
+            "pmaid": "352",
+            "point_x": "1281383.1251418",
+            "point_y": "260688.6404933",
+            "the_geom": {
+                "type": "Point",
+                "coordinates": [
+                    -122.29162384952146,
+                    47.70534162689962
+                ]
+            }
+        },
+        {
+            "address": "2535 32nd Ave West",
+            "coordinato": "Bill Dougherty",
+            "full_name": "Lowery C. \"Pop\" Mounger Pool",
+            "gis_edt_dt": "1899-11-30T00:00:00.000Z",
+            "indoor_out": "Outdoor",
+            "latitude": "47.64290025",
+            "longitude": "-122.3988701",
+            "name": "Mounger Pool",
+            "official_n": "Lowery C. \"Pop\" Mounger Pool",
+            "phone": "684-4078",
+            "pmaid": "4473",
+            "point_x": "1254519.12506413",
+            "point_y": "238435.60954015",
+            "the_geom": {
+                "type": "Point",
+                "coordinates": [
+                    -122.39887010304064,
+                    47.642900252830444
+                ]
+            }
+        }
+      ],
       clickedPoolId: null,
       hasError: false,
     };
   }
+
   getClickedPoolId = clickedPoolId => {
     this.setState({ clickedPoolId });
-  };
-
-  getPoolData() {
-    fetch("https://data.seattle.gov/resource/ppq2-qxkx", {
-      method: "GET",
-      mode: "cors",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      data: {
-        app_token: "XYEEYf573j7hRlczkT6WSAZKK"
-      }
-    })
-      .then(response => response.json())
-      .then(data => this.setState({ poolList: data, filteredPoolList: data }))
-      .catch((error) => {this.setState({hasError: true})})
   }
+
+  // getPoolData() {
+  //   fetch("https://data.seattle.gov/resource/ppq2-qxkx", {
+  //     method: "GET",
+  //     mode: "cors",
+  //     headers: {
+  //       "Content-Type": "application/json"
+  //     },
+  //     data: {
+  //       app_token: "XYEEYf573j7hRlczkT6WSAZKK"
+  //     }
+  //   })
+  //     .then(response => response.json())
+  //     .then(data => this.setState({ poolList: data, filteredPoolList: data }))
+  //     .catch((error) => {this.setState({hasError: true})})
+  // }
 
   setMapError = () => {
     this.setState({ hasError: true });
-  } 
+  }
 
   // The pool data gets fetched
-  async componentDidMount() {
-    await this.getPoolData();
-  }
+  // async componentDidMount() {
+  //   await this.getPoolData();
+  // }
 
   handleChange = (__, poolFilter) => {
     this.setState({
@@ -55,7 +497,7 @@ class App extends Component {
             : "Indoor" || "Outdoor"
       )
     });
-  };
+  }
 
   render() {
     return (
