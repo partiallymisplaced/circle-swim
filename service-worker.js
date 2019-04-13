@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.2/workbox-sw.js");
 
 importScripts(
-  "/circle-swim/precache-manifest.e5357af80dec3b8c623673a0248a61dc.js"
+  "/circle-swim/precache-manifest.35a4b90e62e081abc59528453105ba8c.js"
 );
 
 workbox.clientsClaim();
