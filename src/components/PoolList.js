@@ -37,8 +37,8 @@ class PoolList extends Component {
           </ol>
         </div>
       <footer>
-        <p>Pool data from the</p>
-        <a href="https://data.seattle.gov/" target="_blank" rel="noopener noreferrer">City of Seattle Open Data portal</a>.
+        <p>Pool data from the
+        <a href="https://data.seattle.gov/" target="_blank" rel="noopener noreferrer"> City of Seattle Open Data portal</a>.</p>
         </footer>
       </aside>;
   }
